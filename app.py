@@ -16,6 +16,13 @@ st.title("Farm Intrusion Detection App")
 # to create the input box for uploading images
 st.write("Upload an image to detect farm invaders (e.g., cows, goats, humans).")
 
+# Sidebar for model selection
+model_choice = st.sidebar.selectbox(
+    "Select YOLOv8 Model",
+    ("yolov8n","yolov8s", "yolov8m", "yolov12n", "yolov12s", "yolov12m")
+)
+
+
 # Map model names to Google Drive file IDs
 MODEL_URLS = {
     "yolov8n": "https://drive.google.com/file/d/18dW1ZJt467nsQzWvK6Um5GCs7UsBWzeH/view?usp=sharing",
@@ -48,6 +55,7 @@ def load_model(model_name):
 
     # Try loading YOLO model
     try:
+        filename = load_model(model_choice)
         model = YOLO(filename)
         return model
     except Exception as e:
@@ -83,6 +91,7 @@ if uploaded_file:
                 cls = int(box.cls[0])
                 conf = float(box.conf[0])
                 st.write(f"- {model.names[cls]} ({conf:.2f})")
+
 
 
 
