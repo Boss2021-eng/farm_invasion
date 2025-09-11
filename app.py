@@ -26,23 +26,33 @@ MODEL_URLS = {
     "yolov12m": "https://drive.google.com/file/d/1ntbnqLCIN63yxm2T9g1k7HJi7QgmU5hA/view?usp=sharing",
 }
 
-# Sidebar for model selection
-model_choice = st.sidebar.selectbox(
-    "Select YOLO Model",
-    list(MODEL_URLS.keys())
-)
-
 # Cache model loading
 @st.cache_resource
 def load_model(model_name):
     url = MODEL_URLS[model_name]
     filename = f"{model_name}.pt"
 
-    # Download only if not already present
+    # Delete file if it exists but might be corrupted
+    if os.path.exists(filename) and os.path.getsize(filename) < 1024 * 1024:  # <1MB likely corrupted
+        os.remove(filename)
+
+    # Download only if file is missing
     if not os.path.exists(filename):
+        st.info(f"Downloading {model_name} weights...")
         gdown.download(url, filename, quiet=False)
 
-    return YOLO(filename)
+    # Verify file exists after download
+    if not os.path.exists(filename):
+        st.error(f"Failed to download {filename}. Check your Google Drive link.")
+        return None
+
+    # Try loading YOLO model
+    try:
+        model = YOLO(filename)
+        return model
+    except Exception as e:
+        st.error(f"Error loading model: {e}")
+        return None
 
 # Load the chosen model
 model = load_model(model_choice)
@@ -76,5 +86,6 @@ if uploaded_file:
                 cls = int(box.cls[0])
                 conf = float(box.conf[0])
                 st.write(f"- {model.names[cls]} ({conf:.2f})")
+
 
 
