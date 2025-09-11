@@ -54,9 +54,6 @@ def load_model(model_name):
         st.error(f"Error loading model: {e}")
         return None
 
-# Load the chosen model
-model = load_model(model_choice)
-
 
 # Upload image to the app, considering images like jpg, jpeg and png
 uploaded_file = st.file_uploader("Upload an image", type=["jpg", "jpeg", "png"])
@@ -86,6 +83,7 @@ if uploaded_file:
                 cls = int(box.cls[0])
                 conf = float(box.conf[0])
                 st.write(f"- {model.names[cls]} ({conf:.2f})")
+
 
 
 
