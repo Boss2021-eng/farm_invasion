@@ -1,11 +1,9 @@
- # import relevant libraries
+# import relevant libraries
 import streamlit as st
 from ultralytics import YOLO
 from PIL import Image
-import io
 import gdown
 import os
-
 
 # Streamlit page outline
 st.set_page_config(page_title="Farm Invasion Detector", layout="centered")
@@ -18,12 +16,11 @@ st.write("Upload an image to detect farm invaders (e.g., cows, goats, humans).")
 
 # Sidebar for model selection
 model_choice = st.sidebar.selectbox(
-    "Select YOLOv8 Model",
-    ("yolov8n","yolov8s", "yolov8m", "yolov12n", "yolov12s", "yolov12m")
+    "Select YOLO Model",
+    ("yolov8n", "yolov8s", "yolov8m", "yolov12n", "yolov12s", "yolov12m")
 )
 
-
-# Map model names to Google Drive file IDs
+# Map model names to Google Drive file IDs (replace with your real file IDs)
 MODEL_URLS = {
     "yolov8n": "https://drive.google.com/file/d/18dW1ZJt467nsQzWvK6Um5GCs7UsBWzeH/view?usp=sharing",
     "yolov8s": "https://drive.google.com/file/d/13VFzffenaY7qBBk6SLIkebPs7LzrrZTO/view?usp=sharing",
@@ -55,18 +52,19 @@ def load_model(model_name):
 
     # Try loading YOLO model
     try:
-        filename = load_model(model_choice)
         model = YOLO(filename)
         return model
     except Exception as e:
         st.error(f"Error loading model: {e}")
         return None
 
+# Load the chosen model
+model = load_model(model_choice)
 
 # Upload image to the app, considering images like jpg, jpeg and png
 uploaded_file = st.file_uploader("Upload an image", type=["jpg", "jpeg", "png"])
 
-if uploaded_file:
+if uploaded_file and model:
     # Open and display original image
     image = Image.open(uploaded_file).convert("RGB")
     st.image(image, caption="Uploaded Image", use_column_width=True)
@@ -91,8 +89,3 @@ if uploaded_file:
                 cls = int(box.cls[0])
                 conf = float(box.conf[0])
                 st.write(f"- {model.names[cls]} ({conf:.2f})")
-
-
-
-
-
