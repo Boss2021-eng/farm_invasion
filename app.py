@@ -5,22 +5,63 @@ from PIL import Image
 # ---------------- PAGE CONFIG ----------------
 st.set_page_config(page_title="Farm Intrusion Detector", layout="wide")
 
-# ---------------- CUSTOM UI ----------------
 st.markdown("""
     <style>
-    .main { background-color: #f5f7f9; }
+
+    /* Main App Background */
+    .stApp {
+        background: linear-gradient(
+            rgba(20, 40, 20, 0.85),
+            rgba(10, 25, 10, 0.95)
+        ),
+        url("https://images.unsplash.com/photo-1500382017468-9049fed747ef");
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+    }
+
+    /* Make content readable */
+    .main {
+        background-color: rgba(255, 255, 255, 0.92);
+        padding: 2rem;
+        border-radius: 12px;
+    }
+
+    /* Sidebar styling */
+    section[data-testid="stSidebar"] {
+        background-color: #1b3a1b;
+        color: white;
+    }
+
+    /* Buttons */
     .stButton>button {
         width: 100%;
         border-radius: 8px;
         height: 3em;
-        background-color: #2e7d32;
+        background: linear-gradient(90deg, #2e7d32, #66bb6a);
         color: white;
         font-weight: 600;
+        border: none;
         transition: 0.3s;
     }
+
     .stButton>button:hover {
-        background-color: #1b5e20;
+        background: linear-gradient(90deg, #1b5e20, #43a047);
+        transform: scale(1.02);
     }
+
+    /* Headers */
+    h1, h2, h3 {
+        color: #1b5e20;
+    }
+
+    /* Cards / containers */
+    .stTabs [data-baseweb="tab-panel"] {
+        background-color: white;
+        padding: 1rem;
+        border-radius: 10px;
+    }
+
     </style>
 """, unsafe_allow_html=True)
 
