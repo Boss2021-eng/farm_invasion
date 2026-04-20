@@ -3,7 +3,7 @@ from ultralytics import YOLO
 from PIL import Image
 import io
 
-# 1. PAGE CONFIG & STYLING
+# To design the page
 st.set_page_config(page_title="Farm Invasion Detector", layout="wide")
 
 # Custom CSS to make the interface feel modern
@@ -14,7 +14,7 @@ st.markdown("""
     </style>
     """, unsafe_allow_value=True)
 
-# 2. SIDEBAR (Inputs & Controls)
+# SIDEBAR (Inputs & Controls)
 with st.sidebar:
     st.title("🚜 App Settings")
     model_choice = st.selectbox("Model Version", ("yolov8n", "yolov8s", "yolov12n"))
@@ -25,11 +25,11 @@ with st.sidebar:
     conf_threshold = st.slider("Confidence Threshold", 0.0, 1.0, 0.25)
     st.info("Adjust threshold: Higher values show only high-certainty detections.")
 
-# 3. HEADER
+#  HEADER
 st.title("🛡️ Farm Intrusion Detection")
 st.write("Real-time identification of unauthorized livestock or humans within farm perimeters.")
 
-# 4. MODEL LOADING (Kept as requested)
+# 4. MODEL LOADING 
 @st.cache_resource
 def load_model(model_name):
     return YOLO(f"{model_name}.pt")
