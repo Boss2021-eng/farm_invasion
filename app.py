@@ -251,8 +251,7 @@ with st.sidebar:
     st.markdown("---")
     st.markdown("""
     <div style="font-size:0.75rem; color:rgba(215,230,220,0.5); line-height:1.7;">
-        AgriGuard uses real-time object detection to identify humans, animals,
-        and vehicles on your farmland. Powered by YOLOv8.
+        AgriGuard uses YOLOv8-powered object detection to identify humans, animals, and vehicles in uploaded farm images.
     </div>
     """, unsafe_allow_html=True)
 
@@ -269,7 +268,6 @@ st.markdown("""
     keeping your land safe around the clock.
 </div>
 <div class="stat-row">
-    <div class="stat-pill">⚡ Real-time Analysis</div>
     <div class="stat-pill">🎯 Multi-class Detection</div>
     <div class="stat-pill">🔒 Offline Processing</div>
 </div>
