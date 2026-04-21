@@ -1,6 +1,6 @@
 # 🛡️ Smart Farm Intrusion Detection System  
 ### *Smart Farm Perimeter Monitoring for Modern Agriculture*
-🌐 [Live App – Farm Intrusion Detector](https://farmintrusion-5isujh7x227c6fjbop8emh.streamlit.app/)
+🌐 [Live App – Farm Intrusion Detector](https://farminvasion-qmsyrcgzr3gvnkfgidasxu.streamlit.app/)
 ---
 
 ## 🌾 Overview
@@ -73,10 +73,6 @@ Each detected object is highlighted with:
 - Bounding boxes  
 - Class labels (e.g., *person, cow, goat*)  
 - Confidence scores  
-
----
-
-### 📊 Detection Logs
 
 Example output:
 <p align="center">
