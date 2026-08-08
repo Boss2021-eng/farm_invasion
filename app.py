@@ -1,7 +1,10 @@
-streamlit==1.49.1
-ultralytics==8.3.198
-torch==2.8.0
-torchvision==0.23.0
-opencv-python-headless==4.12.0.88
-pillow==11.3.0
-numpy==2.2.6
+import streamlit as st
+import cv2
+from ultralytics import YOLO
+
+st.write("OpenCV:", cv2.__version__)
+st.write("YOLO imported successfully")
+
+model = YOLO("your_model.pt")
+
+st.write("YOLO model loaded successfully")
