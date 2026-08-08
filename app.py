@@ -1,10 +1,12 @@
 import streamlit as st
-# import cv2
-# from ultralytics import YOLO
 
-# st.write("OpenCV:", cv2.__version__)
-st.write("YOLO imported successfully")
+st.title("YOLO Environment Test")
 
-# model = YOLO("your_model.pt")
+import cv2
+st.success(f"OpenCV works: {cv2.__version__}")
 
-# st.write("YOLO model loaded successfully")
+from ultralytics import YOLO
+st.success("Ultralytics YOLO works")
+
+import torch
+st.success(f"PyTorch works: {torch.__version__}")
