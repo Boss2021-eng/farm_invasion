@@ -1,7 +1,7 @@
-import streamlit as st
-from ultralytics import YOLO
-from PIL import Image
-import base64
-from io import BytesIO
-
-st.write("OpenCV version:", cv2.__version__)
+streamlit==1.49.1
+ultralytics==8.3.198
+torch==2.8.0
+torchvision==0.23.0
+opencv-python-headless==4.12.0.88
+pillow==11.3.0
+numpy==2.2.6
